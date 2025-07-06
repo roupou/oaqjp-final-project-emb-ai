@@ -1,18 +1,18 @@
 from flask import Flask, request, render_template
-import emotion_detectormot
+from final_project import emotion_detection  # assumes emotion_detection.py is inside final_project/
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')  # index.html must be in the templates folder
+    return render_template('index.html')
 
 @app.route('/emotionDetector', methods=['POST'])
-def emotion_detector():
+def emotion_detector_route():
     text = request.form['text']  # input field name="text" in the HTML
 
-    # Get result from your module
-    result = emotion_predictor(text)
+    # Call your actual emotion function
+    result = emotion_detection.emotion_detector(text)
 
     # Extract emotions
     anger = result.get("anger", 0)
@@ -22,7 +22,7 @@ def emotion_detector():
     sadness = result.get("sadness", 0)
     dominant = result.get("dominant_emotion", "unknown")
 
-    # Format output
+    # Format the response
     response = (
         f"For the given statement, the system response is "
         f"'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, "
@@ -30,3 +30,6 @@ def emotion_detector():
     )
 
     return response
+
+if __name__ == '__main__':
+    app.run(debug=True)
