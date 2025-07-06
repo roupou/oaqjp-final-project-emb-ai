@@ -24,10 +24,15 @@ def emotion_detector_route():
 
     # Format the response
     response = (
-        f"For the given statement, the system response is "
-        f"'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, "
-        f"'joy': {joy} and 'sadness': {sadness}. The dominant emotion is {dominant}."
-    )
+    f"For the given statement, the system response is:\n"
+    f"• anger: {anger}\n"
+    f"• disgust: {disgust}\n"
+    f"• fear: {fear}\n"
+    f"• joy: {joy}\n"
+    f"• sadness: {sadness}\n"
+    f"The dominant emotion is: {dominant}.\n"
+)
+
 
     return response
 
